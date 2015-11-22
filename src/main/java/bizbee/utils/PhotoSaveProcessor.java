@@ -11,9 +11,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-public class ProcessSavePhotos extends Thread implements InitializingBean,
+public class PhotoSaveProcessor extends Thread implements InitializingBean,
         DisposableBean {
-    private static final Logger logger = Logger.getLogger(ProcessSavePhotos.class);
+    private static final Logger logger = Logger.getLogger(PhotoSaveProcessor.class);
     protected boolean destroy = false;
 
     @Autowired

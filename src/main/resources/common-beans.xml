@@ -28,7 +28,6 @@ http://www.springframework.org/schema/cache http://www.springframework.org/schem
           p:location="classpath:frog-${envTarget}.properties" name="propertiesBean"/>
 
     <util:properties id="frogProps" location="classpath:frog-${envTarget}.properties"/>
-
     <util:properties id="errorProps" location="classpath:error.properties"/>
     <util:properties id="messageProps" location="classpath:messages.properties"/>
 
@@ -73,7 +72,6 @@ http://www.springframework.org/schema/cache http://www.springframework.org/schem
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
     </context:component-scan>
 
-
     <bean class="org.springframework.orm.jpa.JpaTransactionManager"
           id="transactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
@@ -89,6 +87,6 @@ http://www.springframework.org/schema/cache http://www.springframework.org/schem
         <property name="subject" value="${urgently.receipt.email.subject}"/>
     </bean>
 
-    <bean id="ProcessSavePhotos" class="bizbee.utils.ProcessSavePhotos"/>
+    <bean id="photoSaveProcessor" class="bizbee.utils.PhotoSaveProcessor"/>
 
 </beans>

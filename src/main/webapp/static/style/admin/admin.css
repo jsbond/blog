@@ -1,0 +1,55 @@
+div {
+    border-color: #70d3ff;
+}
+div.right {
+    border-style: solid;
+    padding-bottom: 100%
+}
+a {
+    font-size: 20px;
+}
+h2 {
+    font-size: 25px;
+    text-align: center;
+}
+p.photos_p_center {
+    margin-top: 15px;
+    text-align: center;
+}
+div.photos_image {
+    border-right-style: solid;
+    border-right-width: 1px;
+}
+div.photos_photo {
+    border-top-style: solid;
+}
+div.photos_desc {
+    padding-top: 15px;
+    padding-left: 30px;
+}
+div.pages_child {
+    border-width: 1px;
+    border-style: solid;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+div.pages_form {
+    border-width: 1px;
+    border-style: solid;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+div.photos_buttons {
+    padding-top: 20px;
+}
+
+div.bordered {
+    border-width: 1px;
+    border-style: solid;
+}
+div.escape {
+    margin-left: 90%;
+}
+input.escape {
+    border-radius: 50%;
+}

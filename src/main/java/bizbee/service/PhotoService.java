@@ -39,10 +39,6 @@ public class PhotoService {
         this.photoDAO.persist(photo);
     }
 
-    public Photo getById(final long id) {
-        return this.photoDAO.get(id);
-    }
-
     public Photo findByUrl(final String url) {
         return this.photoDAO.findByUrl(url);
     }

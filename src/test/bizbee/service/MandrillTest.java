@@ -1,10 +1,14 @@
 package bizbee.service;
 
+import bizbee.model.Photo;
 import com.microtripit.mandrillapp.lutung.MandrillApi;
 import com.microtripit.mandrillapp.lutung.model.MandrillApiError;
 import com.microtripit.mandrillapp.lutung.view.MandrillMessage;
+import org.apache.commons.collections.ListUtils;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -55,5 +59,14 @@ public class MandrillTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void testService() {
+        PhotoService photoService = Mockito.mock(PhotoService.class);
+        Mockito.when(photoService.findAllPhotos()).thenReturn((List<Photo>) ListUtils.EMPTY_LIST);
+        List<Photo> photos = photoService.findAllPhotos();
+        Assert.assertTrue(mandrillEmailService.sendClientMessage("test", "jsbond", "iambond@mail.ru", "123"));
+
     }
 }

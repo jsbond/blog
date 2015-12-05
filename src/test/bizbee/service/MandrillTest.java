@@ -1,23 +1,13 @@
 package bizbee.service;
 
-import bizbee.model.Photo;
-import com.microtripit.mandrillapp.lutung.MandrillApi;
-import com.microtripit.mandrillapp.lutung.model.MandrillApiError;
-import com.microtripit.mandrillapp.lutung.view.MandrillMessage;
-import org.apache.commons.collections.ListUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -31,42 +21,12 @@ public class MandrillTest {
     @Autowired
     private MandrillEmailService mandrillEmailService;
 
-
-
     static {
         System.setProperty("envTarget", "local");
     }
 
     @Test
-    public void testMandrill() {
-        MandrillApi mandrillApi = new MandrillApi("ZSNzhnibZMQKfxpq4ifj_g");
-        MandrillMessage message = new MandrillMessage();
-        message.setFromEmail("iambond@mail.ru");
-        List<MandrillMessage.Recipient> toList = new ArrayList<MandrillMessage.Recipient>();
-        MandrillMessage.Recipient recipient = new MandrillMessage.Recipient();
-        recipient.setEmail("iambond@mail.ru"); //TODO
-        recipient.setName("Eva");
-        toList.add(recipient);
-        message.setTo(toList);
-        message.setSubject("Сообщение клиента");
-        message.setHtml("<h2>Hi</h2>");
-        message.setText("yo");
-
-        try {
-            mandrillApi.messages().send(message, true);
-        } catch (MandrillApiError mandrillApiError) {
-            mandrillApiError.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void testService() {
-        PhotoService photoService = Mockito.mock(PhotoService.class);
-        Mockito.when(photoService.findAllPhotos()).thenReturn((List<Photo>) ListUtils.EMPTY_LIST);
-        List<Photo> photos = photoService.findAllPhotos();
+    public void testSendClientMessage() {
         Assert.assertTrue(mandrillEmailService.sendClientMessage("test", "jsbond", "iambond@mail.ru", "123"));
-
     }
 }

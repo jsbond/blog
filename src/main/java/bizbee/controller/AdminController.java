@@ -83,19 +83,4 @@ public class AdminController {
 
         return "success";
     }
-
-
-
-//    @RequestMapping(value = {"/photo/ftp/process"}, method = RequestMethod.POST)
-//    public String processFiles()  {
-//        Path path1 = Paths.get("Test").normalize();
-//        String dir  = path1.toAbsolutePath().toString();
-//
-//        File directory = new File(dir);
-//        File parent = directory.getParentFile();
-//        File[] files = parent.listFiles();
-//
-//        return "redirect:/admin/photos";
-//    }
-
 }

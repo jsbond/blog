@@ -1,8 +1,6 @@
 package bizbee.dao;
 
-import bizbee.model.Category;
 import bizbee.model.Photo;
-import bizbee.model.Series;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

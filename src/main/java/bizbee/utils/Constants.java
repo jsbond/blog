@@ -4,6 +4,7 @@ package bizbee.utils;
  *
  */
 public class Constants {
+    static final ClassLoader loader = Constants.class.getClassLoader();
 
     public static final class PhotoStatus {
         public static final int DISABLED = 0;
@@ -20,6 +21,6 @@ public class Constants {
         public static final int SINGLE = 1;
     }
 
-    public static final String PHOTO_DIRECTORY_TO = "D:/projects/education/site/src/main/webapp/static/img/base/";
-    public static final String PHOTO_DIRECTORY_FROM = "D:/projects/education/site/src/main/webapp/static/img/upload";
+    public static final String PHOTO_DIRECTORY_TO = loader.getResource("../../static/img/base").getPath();
+    public static final String PHOTO_DIRECTORY_FROM = loader.getResource("../../static/img/upload").getPath();
 }

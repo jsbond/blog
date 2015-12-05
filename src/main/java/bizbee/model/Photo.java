@@ -39,12 +39,6 @@ public class Photo implements Serializable {
     private Date createdAt;
 
     @ManyToMany(mappedBy = "photos")
-    private List<Category> categories;
-
-    @ManyToMany(mappedBy = "photos")
-    private List<Series> series;
-
-    @ManyToMany(mappedBy = "photos")
     private List<Page> pages;
 
     public long getId() {
@@ -69,22 +63,6 @@ public class Photo implements Serializable {
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
-    }
-
-    public List<Series> getSeries() {
-        return series;
-    }
-
-    public void setSeries(List<Series> series) {
-        this.series = series;
     }
 
     public int getStatus() {

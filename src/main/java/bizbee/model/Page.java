@@ -56,10 +56,10 @@ public class Page implements Serializable {
     private Photo titul;
 
     @OneToMany(mappedBy = "parentPage")
-    private List<PageInteraction> parentsInteractions;
+    private List<PageInteraction> parents;
 
     @OneToMany(mappedBy = "childPage")
-    private List<PageInteraction> childsInteractions;
+    private List<PageInteraction> children;
 
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -108,20 +108,20 @@ public class Page implements Serializable {
         this.photos = photos;
     }
 
-    public List<PageInteraction> getParentsInteractions() {
-        return parentsInteractions;
+    public List<PageInteraction> getParents() {
+        return parents;
     }
 
-    public void setParentsInteractions(List<PageInteraction> parentsInteractions) {
-        this.parentsInteractions = parentsInteractions;
+    public void setParents(List<PageInteraction> parents) {
+        this.parents = parents;
     }
 
-    public List<PageInteraction> getChildsInteractions() {
-        return childsInteractions;
+    public List<PageInteraction> getChildren() {
+        return children;
     }
 
-    public void setChildsInteractions(List<PageInteraction> childsInteractions) {
-        this.childsInteractions = childsInteractions;
+    public void setChildren(List<PageInteraction> children) {
+        this.children = children;
     }
 
     public int getType() {

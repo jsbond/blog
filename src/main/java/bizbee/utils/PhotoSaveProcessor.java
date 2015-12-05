@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 public class PhotoSaveProcessor extends Thread implements InitializingBean,
         DisposableBean {
     private static final Logger logger = Logger.getLogger(PhotoSaveProcessor.class);
+
     protected boolean destroy = false;
 
     @Autowired
@@ -57,18 +58,18 @@ public class PhotoSaveProcessor extends Thread implements InitializingBean,
 
     private void processSavePhotos() {
         try {
-            String destinationDirectory = Constants.PHOTO_DIRECTORY_TO;
-            File dir = new File(Constants.PHOTO_DIRECTORY_FROM);
-            File[] files = dir.listFiles();
             FileInputStream inputStream;
             FileOutputStream outputStream;
+
+            File directoryFrom = new File(Constants.PHOTO_DIRECTORY_FROM);
+            File[] files = directoryFrom.listFiles();
 
             if (files != null) {
                 byte[] buffer = new byte[512];
                 for (File file : files) {
                     Long uniqueId = this.photoService.getMaxId() + 1;
                     inputStream = new FileInputStream(file);
-                    outputStream = new FileOutputStream(destinationDirectory + uniqueId.toString() + ".jpg");
+                    outputStream = new FileOutputStream(Constants.PHOTO_DIRECTORY_TO + uniqueId.toString() + ".jpg");
                     int rc;
 
                     while ((rc = inputStream.read(buffer)) != -1) {
@@ -77,7 +78,7 @@ public class PhotoSaveProcessor extends Thread implements InitializingBean,
                     outputStream.close();
                     inputStream.close();
 
-                    Photo photo = this.photoService.createPhoto(uniqueId.toString() + ".jpg", Constants.PhotoStatus.NEW);
+                    Photo photo = this.photoService.createPhoto(uniqueId.toString(), Constants.PhotoStatus.NEW);
                     this.photoService.persist(photo);
 
                     if (!file.delete()) {

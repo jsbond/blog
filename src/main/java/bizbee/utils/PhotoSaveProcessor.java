@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 public class PhotoSaveProcessor extends Thread implements InitializingBean,
         DisposableBean {
     private static final Logger logger = Logger.getLogger(PhotoSaveProcessor.class);
+    static final ClassLoader loader = PhotoSaveProcessor.class.getClassLoader();
 
     protected boolean destroy = false;
 
@@ -60,16 +61,17 @@ public class PhotoSaveProcessor extends Thread implements InitializingBean,
         try {
             FileInputStream inputStream;
             FileOutputStream outputStream;
+            String dirFrom = loader.getResource("../../static/img/upload").getPath();
+            String destinationDir = loader.getResource("../../static/img/base").getPath();
+            File directoryFrom = new File(dirFrom);
+            File[] photoFiles = directoryFrom.listFiles();
 
-            File directoryFrom = new File(Constants.PHOTO_DIRECTORY_FROM);
-            File[] files = directoryFrom.listFiles();
-
-            if (files != null) {
+            if (photoFiles != null) {
                 byte[] buffer = new byte[512];
-                for (File file : files) {
+                for (File file : photoFiles) {
                     Long uniqueId = this.photoService.getMaxId() + 1;
                     inputStream = new FileInputStream(file);
-                    outputStream = new FileOutputStream(Constants.PHOTO_DIRECTORY_TO + uniqueId.toString() + ".jpg");
+                    outputStream = new FileOutputStream(destinationDir + uniqueId.toString() + ".jpg");
                     int rc;
 
                     while ((rc = inputStream.read(buffer)) != -1) {
@@ -78,7 +80,7 @@ public class PhotoSaveProcessor extends Thread implements InitializingBean,
                     outputStream.close();
                     inputStream.close();
 
-                    Photo photo = this.photoService.createPhoto(uniqueId.toString(), Constants.PhotoStatus.NEW);
+                    Photo photo = this.photoService.createPhoto(Constants.PhotoStatus.NEW);
                     this.photoService.persist(photo);
 
                     if (!file.delete()) {

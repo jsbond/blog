@@ -4,9 +4,7 @@ use site;
 
 CREATE TABLE `photos` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
-  `url` VARCHAR(50) not NULL ,
-  PRIMARY KEY (`id`),
-  UNIQUE (`url`)
+  PRIMARY KEY (`id`)
 )
   ENGINE = innoDB
   DEFAULT CHAR SET = utf8;
@@ -17,7 +15,7 @@ ALTER TABLE `photos` ADD COLUMN `created_at` DATETIME;
 
 ALTER TABLE photos change enabled status int(2) DEFAULT 1;
 
-insert into `photos` (url, status) values ("test", 0);
+insert into `photos` (status) values (0);
 
 ALTER TABLE photos change status status int(2) default 1;
 
@@ -25,7 +23,7 @@ CREATE TABLE `pages` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(30) not NULL ,
   `status` int(2) not NULL,
-  `titul_photo_id` BIGINT(20) not NULL,
+  `titul_photo_id` BIGINT(20),
   PRIMARY KEY (`id`),
   CONSTRAINT `PHOTOS_PAGES` FOREIGN KEY (`titul_photo_id`) REFERENCES `photos` (`id`)
 )

@@ -58,10 +58,9 @@ public class PhotoService {
         return this.photoDAO.findByIdList(photoIdList);
     }
 
-    public Photo createPhoto(String url, int status) {
+    public Photo createPhoto(int status) {
         Photo photo = new Photo();
         photo.setCreatedAt(new Date());
-        photo.setUrl(url);
         photo.setStatus(status);
         return photo;
     }

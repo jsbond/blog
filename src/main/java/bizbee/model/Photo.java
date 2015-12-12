@@ -26,9 +26,6 @@ public class Photo implements Serializable {
     private long id;
 
     @Basic
-    private String url;
-
-    @Basic
     private String text;
 
     @Basic
@@ -47,14 +44,6 @@ public class Photo implements Serializable {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public String getText() {

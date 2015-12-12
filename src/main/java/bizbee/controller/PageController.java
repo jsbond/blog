@@ -61,15 +61,9 @@ public class PageController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String savePage(HttpServletRequest request,
-                           @RequestParam (value = "id") final String id,
-                           @RequestParam (value = "name") final String name,
-                           @RequestParam (value = "photo_id") final String photoUrl) {
-        int category = 0;
-        if (request.getParameter("category") != null) {
-            category = 1;
-        }
-
-        this.pageService.createPage(id, name, category, photoUrl);
+                           @RequestParam (value = "id") final String pageID,
+                           @RequestParam (value = "name") final String pageName) {
+        this.pageService.createPage(pageID, pageName);
         return "redirect:/admin/pages";
     }
 

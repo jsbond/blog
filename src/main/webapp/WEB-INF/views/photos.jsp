@@ -55,6 +55,19 @@
             }
         }
 
+        function chooseAllPhotos() {
+            var buttons = document.getElementsByClassName("photos_desc_btn_choose");
+            var photo;
+
+            for (i = 0; i < buttons.length; i++) {
+                buttons[i].value = "Отменить";
+                buttons[i].className = buttons[i].className.replace("btn-success", "btn-danger");
+                photo = buttons[i].id.substring(11, buttons[i].id.length);
+                photo = "photo_" + photo;
+                document.getElementById(photo).style.backgroundColor = "#f3f3f3";
+            }
+        }
+
         function setTitul() {
             titul = "";
             var buttons = document.getElementsByClassName("btn btn-danger photos_desc_btn_choose");
@@ -63,24 +76,6 @@
                 titul = titul + (buttons[i].id).substring(11, buttons[i].id.length) + ",";
             }
             titul = titul.substring(0, titul.length - 1);
-        }
-
-        function changeStatus() {
-            setTitul();
-            $.ajax({
-                type: 'POST',
-                url: url,
-                data : {"title" : titul},
-                dataType: "json",
-                success: function(data) {
-                    var buttons = document.getElementsByClassName("btn btn-danger photos_desc_btn_choose");
-
-                    for (i = 0; i < buttons.length; i++) {
-                        var button = buttons[i];
-                        $($($(button).parent()).parent()).remove();
-                    }
-                }
-            });
         }
 
         function setPhotos() {
@@ -102,7 +97,7 @@
         function getPage() {
             var group = document.getElementsByName("page_button");
 
-            for (x=0; x<group.length; x++) {
+            for (x = 0; x < group.length; x++) {
                 if (group[x].checked) {
                     return (group[x].value.substring(5, group[x].value.length));
                 }
@@ -150,11 +145,7 @@
             </c:forEach>
             <div class="col-xs-12 photos_buttons">
                 <div class="col-xs-4">
-                    <input type="button" class="btn btn-success" value="Выбрать все"/><br/><br/><br/>
-                </div>
-                <div class="col-xs-4">
-                    <input type="button" class="btn btn-success" id = "change_status_btn" value="Сделать выбранное титульными фото"
-                           onclick="changeStatus();"/>
+                    <input type="button" class="btn btn-success" value="Выбрать все" onclick="chooseAllPhotos();"/><br/><br/><br/>
                 </div>
                 <div class="col-xs-4">
                     <input type="button" class="btn btn-danger" id = "add_to_page_btn" value="Добавить выбранное на страницу"
@@ -166,7 +157,7 @@
         <c:forEach var="photo" items="${requestScope.photos}">
             <div class="row photos_photo" id="photo_${photo.id}">
                 <div class="col-xs-4 photos_image">
-                    <p class="photos_p_center"><img width="320px" src="/static/img/base/${photo.url}" alt=""/></p>
+                    <p class="photos_p_center"><img width="320px" src="/static/img/base/${photo.id}.jpg" alt=""/></p>
                 </div>
                 <div class="col-xs-2 photos_desc ">
                     <input class="btn btn-success photos_desc_btn_choose" type="button" id="btn_choose_${photo.id}"

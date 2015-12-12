@@ -27,22 +27,16 @@ public class PageService {
         return this.pageDAO.findAll();
     }
 
-    public void createPage(final String id, final String name, final int category, final String photoUrl) {
-        Page page = new Page();
-        if (StringUtils.isNotBlank(id)) {
-            page = this.pageDAO.get(Long.valueOf(id));
+    public void createPage(final String pageID, final String name) {
+        Page page;
+
+        if (StringUtils.isNotBlank(pageID)) {
+            page = this.pageDAO.get(Long.valueOf(pageID));
+        } else {
+            page = new Page();
+            page.setCreatedAt(new Date());
         }
-
-        Photo photo = this.photoService.findByUrl(photoUrl);
-
-        if (photo == null) {
-            //TODO
-        }
-
-        page.setCategory(category);
         page.setName(name);
-        page.setCreatedAt(new Date());
-        page.setTitul(photo);
         page.setStatus(Constants.PageStatus.CHILD);
 
         this.pageDAO.merge(page);

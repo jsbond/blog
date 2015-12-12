@@ -23,10 +23,6 @@
                 document.getElementById("titul_input").value = '${requestScope.page.titul.url}';
             }
         }
-        function chooseTitul(id) {
-            document.getElementById("titul").src = "/static/img/base/" + id;
-            document.getElementById("titul_input").value = id;
-        }
     </script>
 </head>
 <body onload="loadData();">
@@ -63,10 +59,6 @@
                     </div>
                 </div>
                 <div class="row pages_form">
-                    <div class="col-xs-9">
-                        Категория?
-                        <input type="checkbox" name="category"/>
-                    </div>
                     <div class="col-xs-3">
                         <input class="btn btn-success" id="submit" type="submit" value="сохранить"/>
                     </div>
@@ -101,7 +93,7 @@
                                     <input type="button" class="btn btn-xs btn-danger escape" value="->"/>
                                 </div>
                                 <div>
-                                    <p class="photos_p_center"><img width="180px" src="/static/img/base/${photo.url}"
+                                    <p class="photos_p_center"><img width="180px" src="/static/img/base/${photo.id}.jpg"
                                                                     alt=""/></p>
                                 </div>
                             </div>
@@ -112,13 +104,6 @@
                     </c:forEach>
                 </div>
             </c:if>
-        </div>
-        <div class="col-xs-2">
-            <c:forEach var="photo" items="${requestScope.tituls}">
-                <div id="${photo.url}" onclick="chooseTitul(this.id)">
-                    <p class="photos_p_center"><img width="150px" alt="" src="/static/img/base/${photo.url}"/></p>
-                </div>
-            </c:forEach>
         </div>
     </div>
 
